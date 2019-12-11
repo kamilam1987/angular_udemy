@@ -6,21 +6,23 @@ import { CoursesService } from '../courses.service';
 @Component({
   selector: 'courses',
   template: `
-  <h2>{{title}}</h2>
-  <ul>
-    <li *ngFor="let course of courses">
-      {{course}}
-    </li>
-  </ul>
+  {{ course.title | uppercase | lowercase }} <br/>
+  {{ course.rating | number:'1.1-1' }} <br/>
+  {{ course.students | number }} <br/>
+  {{ course.price | currency: 'EUR':true:'3.2-2' }} <br/>
+  {{ course.relasedDate | date:'shortDate'}}
   `
   
 })
 export class CoursesComponent implements OnInit {
-  title = "List of courses";
-  courses;
-
-  constructor(service: CoursesService) { 
-    this.courses = service.getCourses();
+  
+  course = {
+    title: "Angular course",
+    rating: 4.9745,
+    students: 30123,
+    price: 150.49,
+    relasedDate: new Date(2019, 6, 1)
+  
   }
 
   ngOnInit() {
